@@ -2498,6 +2498,15 @@ function keyBindings() {
                 win.showDevTools();
                 return false;
         }
+
+        //Custom
+        else if (pressed.metaKey && pressed.keyCode === 65) {
+            pressed.target.select();
+        } else if (pressed.metaKey && pressed.keyCode === 67) {
+            document.execCommand('copy');
+        } else if (pressed.metaKey && pressed.keyCode === 86) {
+            document.execCommand('paste');
+        }
     };
 }
 
