@@ -1,12 +1,20 @@
+from strings import POST_IMAGES
 import re
 
 file_path = input('File path: ')
 game_name = input('Hyphenated game name (venice-2089): ')
-file = '_posts/{file_path}.markdown'.format(file_path = file_path)
+file = '/Users/brendazhang/Desktop/projects/colludia/_posts/{file_path}.markdown'.format(file_path = file_path)
+
+CURR_IMAGE_NUM = -1
+
+def image_incr(match):
+  global CURR_IMAGE_NUM
+  CURR_IMAGE_NUM += 1
+  return '![][image{curr_image_num}]'.format(curr_image_num = CURR_IMAGE_NUM)
 
 with open(file, 'r' ) as f:
   content = f.read()
-  content_new = re.sub('!\[.*\].*', r'![][image0]', content, flags = re.M)
+  content_new = re.sub('!\[.*\].*', image_incr, content, flags = re.M)
   f_out = open(file, 'w+')
   f_out.write(content_new)
   f_out.close()
@@ -16,24 +24,7 @@ game_title_nospace = ''.join(game_name_parts)
 game_title_nospace_caps = ''.join([w.capitalize() for w in game_name_parts])
 
 post = open(file, "a+")
-post.write('\n\
-[image0]: /images/post/{game_title_nospace}/{game_title_nospace_caps}0.png\n\
-[image1]: /images/post/{game_title_nospace}/{game_title_nospace_caps}1.png\n\
-[image2]: /images/post/{game_title_nospace}/{game_title_nospace_caps}2.png\n\
-[image3]: /images/post/{game_title_nospace}/{game_title_nospace_caps}3.png\n\
-[image4]: /images/post/{game_title_nospace}/{game_title_nospace_caps}4.png\n\
-[image5]: /images/post/{game_title_nospace}/{game_title_nospace_caps}5.png\n\
-[image6]: /images/post/{game_title_nospace}/{game_title_nospace_caps}6.png\n\
-[image7]: /images/post/{game_title_nospace}/{game_title_nospace_caps}7.png\n\
-[image8]: /images/post/{game_title_nospace}/{game_title_nospace_caps}8.png\n\
-[image9]: /images/post/{game_title_nospace}/{game_title_nospace_caps}9.png\n\
-[image10]: /images/post/{game_title_nospace}/{game_title_nospace_caps}10.png\n\
-[image11]: /images/post/{game_title_nospace}/{game_title_nospace_caps}11.png\n\
-[image12]: /images/post/{game_title_nospace}/{game_title_nospace_caps}12.png\n\
-[image13]: /images/post/{game_title_nospace}/{game_title_nospace_caps}13.png\n\
-[image14]: /images/post/{game_title_nospace}/{game_title_nospace_caps}14.png\n\
-[image15]: /images/post/{game_title_nospace}/{game_title_nospace_caps}15.png\n\
-'.format(
+post.write(POST_IMAGES.format(
   game_title_nospace = game_title_nospace,
 	game_title_nospace_caps = game_title_nospace_caps
 ))
