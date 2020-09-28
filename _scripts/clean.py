@@ -1,15 +1,8 @@
 import re
 
-folder_name = input('Folder name: ') or 'review'
-file_date = input('File date (YYYY-MM-DD): ')
+file_path = input('File path: ')
 game_name = input('Hyphenated game name (venice-2089): ')
-file_type = input('Hyphenated article type (demo-review): ')
-file = '_posts/{folder_name}/{file_date}-{game_name}-{file_type}.markdown'.format(
-  file_date = file_date,
-  game_name = game_name,
-  folder_name = folder_name,
-  file_type = file_type
-)
+file = '_posts/{file_path}.markdown'.format(file_path = file_path)
 
 with open(file, 'r' ) as f:
   content = f.read()

@@ -23,6 +23,8 @@ parser.add_argument("--completion")
 parser.add_argument("--winningTraits")
 args = parser.parse_args()
 
+month_map = [0, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
 article_title = args.articleTitle
 folder = args.folder
 article_type = args.articleType
@@ -32,6 +34,7 @@ author = args.author or 'Brenda Zhang'
 author_url = author.split(' ')[0].lower() or 'brenda'
 date = args.publishDate
 release_date = args.releaseDate
+release_date_parts = release_date.split('-')
 game_title = args.gameTitle
 developer = args.developer
 publisher = args.publisher
@@ -103,32 +106,37 @@ if 'review' in article_type:
 	completion = args.completion
 	winning_traits = args.winningTraits
 
+	release_date_year = release_date_parts[0]
+	release_date_month = month_map[int(release_date_parts[1]) if int(release_date_parts[1]) > 9 else int(release_date_parts[1][1])]
+	release_date_day = release_date_parts[2]
+	release_date_verbose = '{release_date_month} {release_date_day}, {release_date_year}'.format(release_date_month = release_date_month, release_date_day = release_date_day, release_date_year = release_date_year)
+
 	quick_summary = open('/Users/brendazhang/Desktop/projects/colludia/_data/post-quick-summary.yml', 'a+')
 	quick_summary.write('\n\
-	{game_title_nospace}:\n\
-		quote: {quote}\n\
-		image: post/{game_title_nospace}/{thumbnail}\n\
-		points:\n\
-			- question: Genre\n\
-				answer:   {genres}\n\
-			- question: Developer\n\
-				answer:   {developer}\n\
-			- question: Publisher\n\
-				answer:   {publisher}\n\
-			- question: Main Character\n\
-				answer:   {main_character}\n\
-			- question: Platforms\n\
-				answer:   {platforms}\n\
-			- question: Release Date\n\
-				answer:   {release_date}\n\
-			- question: Time Spent\n\
-				answer:   {time_spent}\n\
-			- question: Completion\n\
-				answer:   {completion}\n\
-			- question: Winning Traits\n\
-				answer:   {winning_traits}\n\
-			- question: Recommended?\n\
-				answer:   {recommended}\n\
+{game_title_nospace}:\n\
+	quote: {quote}\n\
+	image: post/{game_title_nospace}/{thumbnail}\n\
+	points:\n\
+		- question: Genre\n\
+			answer:   {genres}\n\
+		- question: Developer\n\
+			answer:   {developer}\n\
+		- question: Publisher\n\
+			answer:   {publisher}\n\
+		- question: Main Character\n\
+			answer:   {main_character}\n\
+		- question: Platforms\n\
+			answer:   {platforms}\n\
+		- question: Release Date\n\
+			answer:   {release_date_verbose}\n\
+		- question: Time Spent\n\
+			answer:   {time_spent}\n\
+		- question: Completion\n\
+			answer:   {completion}\n\
+		- question: Winning Traits\n\
+			answer:   {winning_traits}\n\
+		- question: Recommended?\n\
+			answer:   {recommended}\n\
 	'.format(
 		completion = completion,
 		developer = developer,
@@ -139,7 +147,7 @@ if 'review' in article_type:
 		publisher = publisher,
 		quote = quote,
 		recommended = recommended,
-		release_date = release_date,
+		release_date_verbose = release_date_verbose,
 		thumbnail = thumbnail,
 		time_spent = time_spent,
 		winning_traits = winning_traits,
@@ -147,3 +155,7 @@ if 'review' in article_type:
 	quick_summary.close()
 
 	print('Extra Quick Summary Information Filled')
+
+print('--------CLEAN FILE: {folder}/{date}-{game_title}-{article_type_hyphen}--------'.format(
+	article_type_hyphen = article_type_hyphen, date = date, folder = folder, game_title = game_title
+))
