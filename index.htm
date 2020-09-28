@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <!-- Automatically updated by your package.json file. -->
+    <title class="applicationTitle">Your Application Name</title>
+
+    <link rel="icon" type="image/x-icon" href="_img/favicon.png">
+    <link rel="stylesheet" href="_style/ven.bootstrap.css">
+    <!-- Change this next line from cerulean to whatever swatch you pick. -->
+    <link rel="stylesheet" href="_style/ven.bootswatch/cerulean.min.css" data-swatch="swapper">
+    <link rel="stylesheet" href="_style/ugui-devtools.css">
+    <link rel="stylesheet" href="_style/style.css">
+
+    <!-- UGUI requires jQuery 1.9.1 or above. -->
+    <script type="text/javascript" src="_scripts/ven.jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="_scripts/ven.bootstrap-3.2.0.min.js"></script>
+    <script type="text/javascript" src="_scripts/ven.dropdowns-enhancement.js"></script>
+    <script type="text/javascript" src="_scripts/ven.bootstrap-slider.min.js"></script>
+    <script type="text/javascript" src="_scripts/ugui.js"></script>
+    <script type="text/javascript" src="_scripts/app.js"></script>
+
+
+
+    <!--
+      /////////////////////////////////////////////////////////////////
+      //                                                             //
+      //              COMMAND LINE ARGUMENT UI BINDINGS              //
+      //                                                             //
+      /////////////////////////////////////////////////////////////////
+      // The order of these arguments controls the order they will   //
+      // be sent out to the command line. If you place a name inside //
+      // double parenthesis like ((cows)) it will automatically be   //
+      // replaced by the value of the element in the #argsForm with  //
+      // a matching data-argName="cows".                             //
+      //                                                             //
+      // Input tags with a type of "file" will also automatically be //
+      // parsed into several sub-arguments for your ease of use such //
+      // as path, name, ext, size, lastModifiedDate, etc.            //
+      //                                                             //
+      // If you need the value of an element parsed for you supply a //
+      // definition. Consult the UGUI documentation for detailed     //
+      // information and instructions on how this feature works.     //
+      /////////////////////////////////////////////////////////////////
+    -->
+
+    <cmd executable="python3">
+      <arg>~/Desktop/projects/UGUI/_scripts/publish.py</arg>
+      <arg>--articletitle ((articleTitle))</arg>
+      <arg>--genres ((genres))</arg>
+      <arg>--folder ((folder))</arg>
+      <arg>--articletype ((articleType))</arg>
+      <arg>--author ((author))</arg>
+      <arg>--publishdate ((publishDate))</arg>
+      <arg>--releasedate ((releaseDate))</arg>
+      <arg>--gametitle ((gameTitle))</arg>
+      <arg>--developer ((developer))</arg>
+      <arg>--publisher ((publisher))</arg>
+      <arg>--tagline ((tagline))</arg>
+      <arg>--tags ((tags))</arg>
+      <arg>--videoid ((videoId))</arg>
+    </cmd>
+    <cmd executable="cli_clean">
+    </cmd>
+
+  </head>
+
+
+
+  <!-- Change the class form dev to prod when you're ready to distribute your application. -->
+  <body role="document" class="dev">
+
+
+
+      <!--
+        /////////////////////////////////////////////////////////////////
+        //                                                             //
+        //                         NAVIGATION                          //
+        //                                                             //
+        /////////////////////////////////////////////////////////////////
+        // Top bar navigation. Some parts are only visible when in dev //
+        // mode. Be sure to change the body class to prod before you   //
+        // distribute your app.                                        //
+        /////////////////////////////////////////////////////////////////
+      -->
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">
+            <img src="_img/logo.png" alt="Logo" />
+            <span class="applicationTitle">Your Application Name</span>
+          </a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">File <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#save" class="save-ugui-settings">Save Settings</a></li>
+                <li><a href="#load" class="load-ugui-settings">Load Settings</a></li>
+                <li><a href="#exit">Exit</a></li>
+              </ul>
+            </li>
+            <li class="dropdown devNav">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">View <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#fullscreen">Fullscreen</a></li>
+                <!-- devNav items are hidden when in Production mode -->
+                <li class="devNav"><a href="#console">Console</a></li>
+                <li class="divider"></li>
+                <li class="devNav"><a href="#cmdoutput">Command Line Output</a></li>
+              </ul>
+            </li>
+            <li class="dropdown navHelp">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <!-- <a href="#about"> must exist in your app as it contains the credits for UGUI -->
+                <li><a href="#about">About</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+
+      <!--
+        /////////////////////////////////////////////////////////////////
+        //                                                             //
+        //              APPLICATION NAME AND DESCRIPTION               //
+        //                                                             //
+        /////////////////////////////////////////////////////////////////
+        // This is automatically replaced by the content in your       //
+        // package.json file.                                          //
+        /////////////////////////////////////////////////////////////////
+      -->
+
+    <div class="container" role="main">
+
+      <header>
+        <h3>
+          <span class="applicationTitle">Your Application Name</span>
+          <small class="applicationDescription">Your Application Description</small>
+        </h3>
+      </header>
+
+
+
+      <!--
+        /////////////////////////////////////////////////////////////////
+        //                                                             //
+        //                      CLI FORM ELEMENTS                      //
+        //                                                             //
+        /////////////////////////////////////////////////////////////////
+        // All form elements used to send commands to your executable  //
+        // must be placed in the argsForm below.                       //
+        /////////////////////////////////////////////////////////////////
+      -->
+
+      <section>
+        <form id="python3" role="form-inline">
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="articleTitle">Article title</label>
+              <small>normal, capitalized title</small>
+              <input type="text" id="articleTitle" class="form-control" required="required" data-argName="articleTitle"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="genres">Genres</label>
+              <small>lowercase, with commas</small>
+              <input type="text" id="genres" class="form-control" required="required" data-argName="genres"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="folder">Folder</label>
+              <small>one word, lowercase</small>
+              <input type="text" id="folder" class="form-control" required="required" data-argName="folder"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="articleType">Article Type</label>
+              <small>can be multiple, but with no commas</small>
+              <input type="text" id="articleType" class="form-control" required="required" data-argName="articleType"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="author">Author</label>
+              <small>normal, capitalized name</small>
+              <input type="text" id="author" class="form-control" required="required" data-argName="author"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="publishDate">Publish Date</label>
+              <small>YYYY-MM-DD</small>
+              <input type="text" id="publishDate" class="form-control" required="required" data-argName="publishDate"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="releaseDate">Release Date</label>
+              <small>YYYY-MM-DD</small>
+              <input type="text" id="releaseDate" class="form-control" required="required" data-argName="releaseDate"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="gameTitle">Game Title</label>
+              <small>hyphenated</small>
+              <input type="text" id="gameTitle" class="form-control" required="required" data-argName="gameTitle"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="developer">Developer</label>
+              <small>normal, capitalized developer</small>
+              <input type="text" id="developer" class="form-control" required="required" data-argName="developer"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="publisher">Publisher</label>
+              <small>normal, capitalized publisher</small>
+              <input type="text" id="publisher" class="form-control" required="required" data-argName="publisher"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="tagline">Tagline</label>
+              <small>normal, capitalized and punctuated tagline</small>
+              <input type="text" id="tagline" class="form-control" required="required" data-argName="tagline"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="tags">Tags</label>
+              <small>lowercase, with commas</small>
+              <input type="text" id="tags" class="form-control" required="required" data-argName="tags"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="videoId">Video ID</label>
+              <small>normal, url parameter</small>
+              <input type="text" id="videoId" class="form-control" data-argName="videoId"></input>
+            </div>
+          </div>
+
+          <div class="row">       
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12 text-right">
+              <button type="submit" class="sendCmdArgs btn btn-default">Run!</button>
+            </div>
+          </div>
+
+        </form>
+
+        <hr />
+
+        <form id="cli_clean" role="form-inline">
+
+          <div></div>
+
+        </form>
+
+
+      </section>
+
+
+
+      <!--
+        /////////////////////////////////////////////////////////////////
+        //                                                             //
+        //                         ABOUT MODAL                         //
+        //                                                             //
+        /////////////////////////////////////////////////////////////////
+        // This content is displayed when the user clicks Help in the  //
+        // top navigation, then About. Some parts of the about modal   //
+        // are automatically replaced by the content defined in your   //
+        // package.json file, such as Application Name and Version.    //
+        /////////////////////////////////////////////////////////////////
+      -->
+
+      <div id="aboutModal" class="modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="glyphicon glyphicon-remove pull-right" data-dismiss="modal" aria-hidden="true"></span>
+              <h4>About</h4>
+            </div>
+            <div class="modal-body">
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <span class="pull-right versionApp" title="Version">V0.1.0</span>
+                  <h3 class="panel-title">About <span class="applicationTitle">Your Application Name</span></h3>
+                </div>
+                <div class="panel-body">
+                  <p class="well well-sm">
+                    <!--
+                      A detailed explanation of what your application does or is used for goes here.
+                    -->
+                    Easily publish Colludia articles
+                  </p>
+                  <p>
+                    <span class="applicationTitle">Your Application Name</span> created by <span class="authorName">Your Name</span>.<br />
+                    <!--
+                      Be sure to credit whoever made the command line executable.<br />
+                      You should probably <a href="http://theirsite.com" class="external-link">link to their site</a> and give a version number for the CLI program.
+                    -->
+                  </p>
+
+                  <!--
+                    This is the "Check for Updates" feature. If your app is publicly avaliable on GitHub
+                    you can use it. Since this takes a few extra steps to set up, it is commented out by
+                    default. See: http://ugui.io/api for more information about this feature.
+                  -->
+                  <!--
+                    <p id="updateResults"></p>
+                    <p class="text-center">
+                      <button id="updateChecker" class="btn btn-primary">Check for updates</button>
+                    </p>
+                  -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div> <!-- end container -->
+  </body>
+</html>
