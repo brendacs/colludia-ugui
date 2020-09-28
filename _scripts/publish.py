@@ -1,4 +1,6 @@
+from strings import *
 import argparse
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--articleTitle")
 parser.add_argument("--genres")
@@ -51,26 +53,7 @@ video_id = args.videoId
 new_post = open('/Users/brendazhang/Desktop/projects/colludia/_posts/{folder}/{date}-{game_title}-{article_type_hyphen}.markdown'.format(
 	article_type_hyphen = article_type_hyphen, date = date, folder = folder, game_title = game_title
 ), 'w+')
-new_post.write('\
----\n\
-layout:       post\n\
-game:         {game_title_nospace}\n\
-permalink:    /{game_title}-{article_type_hyphen}/\n\
-tab-title:    "{article_title}"\n\
-title:        "{article_title} <em class=\'game-title\'>{game_title_space_caps}</em>"\n\
-type:         [{article_type_comma}]\n\
-desc:         "{game_title_space_caps} {article_type}: {tagline}"\n\
-tagline:      "\\\"{tagline}\\"\"\n\
-date:         {date}\n\
-release-date: {release_date}\n\
-image:        {game_title_nospace_caps}.png\n\
-video:        https://www.youtube.com/embed/{video_id}\n\
-author:       {author}\n\
-author-url:   {author_url}\n\
-categories:   [{genres}, {article_type_comma}, story]\n\
-tags:         ["{game_title_space_caps}", "{developer}", "{publisher}", {tags}]\n\
----\
-'.format(
+new_post.write(FRONT_MATTER.format(
 	article_title = article_title,
 	article_type = article_type,
 	article_type_comma = article_type_comma,
@@ -112,32 +95,7 @@ if 'review' in article_type:
 	release_date_verbose = '{release_date_month} {release_date_day}, {release_date_year}'.format(release_date_month = release_date_month, release_date_day = release_date_day, release_date_year = release_date_year)
 
 	quick_summary = open('/Users/brendazhang/Desktop/projects/colludia/_data/post-quick-summary.yml', 'a+')
-	quick_summary.write('\n\
-{game_title_nospace}:\n\
-	quote: {quote}\n\
-	image: post/{game_title_nospace}/{thumbnail}\n\
-	points:\n\
-		- question: Genre\n\
-			answer:   {genres}\n\
-		- question: Developer\n\
-			answer:   {developer}\n\
-		- question: Publisher\n\
-			answer:   {publisher}\n\
-		- question: Main Character\n\
-			answer:   {main_character}\n\
-		- question: Platforms\n\
-			answer:   {platforms}\n\
-		- question: Release Date\n\
-			answer:   {release_date_verbose}\n\
-		- question: Time Spent\n\
-			answer:   {time_spent}\n\
-		- question: Completion\n\
-			answer:   {completion}\n\
-		- question: Winning Traits\n\
-			answer:   {winning_traits}\n\
-		- question: Recommended?\n\
-			answer:   {recommended}\n\
-	'.format(
+	quick_summary.write(QUICK_SUMMARY.format(
 		completion = completion,
 		developer = developer,
 		game_title_nospace = game_title_nospace,
