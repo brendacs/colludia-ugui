@@ -1,32 +1,38 @@
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument("--articletitle")
+parser.add_argument("--articleTitle")
 parser.add_argument("--genres")
 parser.add_argument("--folder")
-parser.add_argument("--articletype")
+parser.add_argument("--articleType")
 parser.add_argument("--author")
-parser.add_argument("--publishdate")
-parser.add_argument("--releasedate")
-parser.add_argument("--gametitle")
+parser.add_argument("--publishDate")
+parser.add_argument("--releaseDate")
+parser.add_argument("--gameTitle")
 parser.add_argument("--developer")
 parser.add_argument("--publisher")
 parser.add_argument("--tagline")
 parser.add_argument("--tags")
-parser.add_argument("--videoid")
+parser.add_argument("--videoId")
+parser.add_argument("--mainChar")
+parser.add_argument("--platforms")
+parser.add_argument("--quote")
+parser.add_argument("--recommended")
+parser.add_argument("--thumbnail")
+parser.add_argument("--timeSpent")
+parser.add_argument("--completion")
+parser.add_argument("--winningTraits")
 args = parser.parse_args()
 
-print('General Post Information')
-
-article_title = args.articletitle
+article_title = args.articleTitle
 folder = args.folder
-article_type = args.articletype
+article_type = args.articleType
 article_type_hyphen = '-'.join(article_type.split(' '))
 article_type_comma = ', '.join(article_type.split(' '))
 author = args.author or 'Brenda Zhang'
 author_url = author.split(' ')[0].lower() or 'brenda'
-date = args.publishdate
-release_date = args.releasedate
-game_title = args.gametitle
+date = args.publishDate
+release_date = args.releaseDate
+game_title = args.gameTitle
 developer = args.developer
 publisher = args.publisher
 game_title_parts = game_title.split('-')
@@ -37,7 +43,7 @@ game_title_space_caps = ' '.join([w.capitalize() for w in game_title_parts])
 genres = args.genres
 tagline = args.tagline
 tags = args.tags
-video_id = args.videoid
+video_id = args.videoId
 
 new_post = open('/Users/brendazhang/Desktop/projects/colludia/_posts/{folder}/{date}-{game_title}-{article_type_hyphen}.markdown'.format(
 	article_type_hyphen = article_type_hyphen, date = date, folder = folder, game_title = game_title
@@ -84,23 +90,24 @@ tags:         ["{game_title_space_caps}", "{developer}", "{publisher}", {tags}]\
 ))
 new_post.close()
 
+print('General Post Information Filled')
+
+print(article_type)
 if 'review' in article_type:
-	print('Extra Quick Summary Information')
+	main_character = args.mainChar
+	platforms = args.platforms
+	quote = args.quote
+	recommended = args.recommended
+	thumbnail = args.thumbnail
+	time_spent = args.timeSpent
+	completion = args.completion
+	winning_traits = args.winningTraits
 
-	main_character = input('Main character: ')
-	platforms = input('Platforms: ') or 'PC'
-	quote = input('Quote: ')
-	recommended = input('Recommended: ') or 'Yes'
-	thumbnail = input('Thumbnail: ')
-	time_spent = input('Time spent: ')
-	completion = input('Completion (%): ') or '100%'
-	winning_traits = input('Winning traits: ')
-
-	quick_summary = open('_data/post-quick-summary.yml', 'a+')
+	quick_summary = open('/Users/brendazhang/Desktop/projects/colludia/_data/post-quick-summary.yml', 'a+')
 	quick_summary.write('\n\
 	{game_title_nospace}:\n\
 		quote: {quote}\n\
-		image: post/{game_title_nospace}/{thumbnail}.png\n\
+		image: post/{game_title_nospace}/{thumbnail}\n\
 		points:\n\
 			- question: Genre\n\
 				answer:   {genres}\n\
@@ -138,3 +145,5 @@ if 'review' in article_type:
 		winning_traits = winning_traits,
 	))
 	quick_summary.close()
+
+	print('Extra Quick Summary Information Filled')

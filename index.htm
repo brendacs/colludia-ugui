@@ -46,20 +46,31 @@
 
     <cmd executable="python3">
       <arg>~/Desktop/projects/UGUI/_scripts/publish.py</arg>
-      <arg>--articletitle ((articleTitle))</arg>
+      <!-- general post info -->
+      <arg>--articleTitle ((articleTitle))</arg>
       <arg>--genres ((genres))</arg>
       <arg>--folder ((folder))</arg>
-      <arg>--articletype ((articleType))</arg>
+      <arg>--articleType ((articleType))</arg>
       <arg>--author ((author))</arg>
-      <arg>--publishdate ((publishDate))</arg>
-      <arg>--releasedate ((releaseDate))</arg>
-      <arg>--gametitle ((gameTitle))</arg>
+      <arg>--publishDate ((publishDate))</arg>
+      <arg>--releaseDate ((releaseDate))</arg>
+      <arg>--gameTitle ((gameTitle))</arg>
       <arg>--developer ((developer))</arg>
       <arg>--publisher ((publisher))</arg>
       <arg>--tagline ((tagline))</arg>
       <arg>--tags ((tags))</arg>
-      <arg>--videoid ((videoId))</arg>
+      <arg>--videoId ((videoId))</arg>
+      <!-- quick summary info -->
+      <arg>--mainChar ((mainChar))</arg>
+      <arg>--platforms ((platforms))</arg>
+      <arg>--quote ((quote))</arg>
+      <arg>--recommended ((recommended))</arg>
+      <arg>--thumbnail ((thumbnail))</arg>
+      <arg>--timeSpent ((timeSpent))</arg>
+      <arg>--completion ((completion))</arg>
+      <arg>--winningTraits ((winningTraits))</arg>
     </cmd>
+
     <cmd executable="cli_clean">
     </cmd>
 
@@ -168,27 +179,15 @@
       <section>
         <form id="python3" role="form-inline">
 
+          <br/>
+
+          <h4>General Article Information</h4>
+
           <div class="row">
             <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
-              <label for="articleTitle">Article title</label>
+              <label for="articleTitle">Article Title</label>
               <small>normal, capitalized title</small>
               <input type="text" id="articleTitle" class="form-control" required="required" data-argName="articleTitle"></input>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
-              <label for="genres">Genres</label>
-              <small>lowercase, with commas</small>
-              <input type="text" id="genres" class="form-control" required="required" data-argName="genres"></input>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
-              <label for="folder">Folder</label>
-              <small>one word, lowercase</small>
-              <input type="text" id="folder" class="form-control" required="required" data-argName="folder"></input>
             </div>
           </div>
 
@@ -197,6 +196,14 @@
               <label for="articleType">Article Type</label>
               <small>can be multiple, but with no commas</small>
               <input type="text" id="articleType" class="form-control" required="required" data-argName="articleType"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="folder">Folder</label>
+              <small>one word, lowercase</small>
+              <input type="text" id="folder" class="form-control" required="required" data-argName="folder"></input>
             </div>
           </div>
 
@@ -218,17 +225,45 @@
 
           <div class="row">
             <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
-              <label for="releaseDate">Release Date</label>
-              <small>YYYY-MM-DD</small>
-              <input type="text" id="releaseDate" class="form-control" required="required" data-argName="releaseDate"></input>
+              <label for="tagline">Tagline</label>
+              <small>normal, capitalized and punctuated tagline</small>
+              <input type="text" id="tagline" class="form-control" required="required" data-argName="tagline"></input>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="tags">Tags</label>
+              <small>lowercase, with commas</small>
+              <input type="text" id="tags" class="form-control" required="required" data-argName="tags"></input>
+            </div>
+          </div>
+
+          <br/>
+
+          <h4>General Game Information</h4>
 
           <div class="row">
             <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
               <label for="gameTitle">Game Title</label>
               <small>hyphenated</small>
               <input type="text" id="gameTitle" class="form-control" required="required" data-argName="gameTitle"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="genres">Genres</label>
+              <small>lowercase, with commas</small>
+              <input type="text" id="genres" class="form-control" required="required" data-argName="genres"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="releaseDate">Release Date</label>
+              <small>YYYY-MM-DD</small>
+              <input type="text" id="releaseDate" class="form-control" required="required" data-argName="releaseDate"></input>
             </div>
           </div>
 
@@ -250,29 +285,81 @@
 
           <div class="row">
             <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
-              <label for="tagline">Tagline</label>
-              <small>normal, capitalized and punctuated tagline</small>
-              <input type="text" id="tagline" class="form-control" required="required" data-argName="tagline"></input>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
-              <label for="tags">Tags</label>
-              <small>lowercase, with commas</small>
-              <input type="text" id="tags" class="form-control" required="required" data-argName="tags"></input>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
               <label for="videoId">Video ID</label>
               <small>normal, url parameter</small>
               <input type="text" id="videoId" class="form-control" data-argName="videoId"></input>
             </div>
           </div>
 
-          <div class="row">       
+          <br/>
+
+          <h4>Extra Information for Game at a Glance</h4>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="quote">Summary Quote</label>
+              <small>normal, capitalized and punctuated</small>
+              <input type="text" id="quote" class="form-control" data-argName="quote"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="mainChar">Main Character</label>
+              <small>normal, capitalized name</small>
+              <input type="text" id="mainChar" class="form-control" data-argName="mainChar"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="thumbnail">Character Thumbnail Image</label>
+              <small>name of image with extension e.g. example.png</small>
+              <input type="text" id="thumbnail" class="form-control" data-argName="thumbnail"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="platforms">Platforms</label>
+              <small>multiple if not out yet, one if played on a specific one</small>
+              <input type="text" id="platforms" class="form-control" data-argName="platforms"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="timeSpent">Time Spent</label>
+              <small>how long you spent on the game, in hours</small>
+              <input type="text" id="timeSpent" class="form-control" data-argName="timeSpent"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="completion">Completion</label>
+              <small>in percentage</small>
+              <input type="text" id="completion" class="form-control" data-argName="completion"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="winningTraits">Winning Traits</label>
+              <small>lowercase, with commas</small>
+              <input type="text" id="winningTraits" class="form-control" data-argName="winningTraits"></input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-s-12 col-md-12 col-l-12">
+              <label for="recommended">Recommended</label>
+              <small>any text</small>
+              <input type="text" id="recommended" class="form-control" data-argName="recommended"></input>
+            </div>
+          </div>
+
+          <div class="row">
             <div class="col-xs-12 col-s-12 col-md-12 col-l-12 text-right">
               <button type="submit" class="sendCmdArgs btn btn-default">Run!</button>
             </div>
