@@ -3,7 +3,7 @@ import re
 
 file_path = input('File path: ')
 game_name = input('Hyphenated game name (venice-2089): ')
-file = '/Users/brendazhang/Desktop/projects/colludia/_posts/{file_path}.markdown'.format(file_path = file_path)
+file = '/Users/brendazhang/Desktop/projects/colludia-gatsby/src/content/posts/{file_path}.markdown'.format(file_path = file_path)
 
 CURR_IMAGE_NUM = -1
 
